@@ -44,10 +44,9 @@ def add():
 # DELETE
 @app.route('/delete/<int:id>')
 def delete(id):
-    with db.session as session:
-        instrument = session.query(Instrument).get(id)
-        session.delete(instrument)
-        session.commit()
+    instrument = Instrument.query.get(id)
+    db.session.delete(instrument)
+    db.session.commit()
     return redirect(url_for('index'))
 
 # UPDATE
